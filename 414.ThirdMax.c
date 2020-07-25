@@ -7,12 +7,12 @@
 
 int thirdMax(int* nums, int numsSize){
     int count[3]={-10000,-10000,-10000};
-    int i;
+    int i,flag=0;
     printf("Hey %d %d %d!\n",count[0],count[1],count[2]);
     for(i=0;i<numsSize;i++){
         count[0]=(nums[i]>count[0])?nums[i]:count[0];
-        //count[1]=(nums[i]<count[0]&&nums[i]>count[1])?nums[i]:count[1];
-        //count[2]=(nums[i]<count[0]&&nums[i]<count[1]&&nums[i]>count[2])?nums[i]:count[2];
+        //count[1]=(nums[i]<count[0]&&nums[i]>count[1])?nums[i]:count[1]; WRONG
+        //count[2]=(nums[i]<count[0]&&nums[i]<count[1]&&nums[i]>count[2])?nums[i]:count[2]; WRONG
     }
     for(i=0;i<numsSize;i++){
         if(nums[i]<count[0]&&nums[i]>count[1])
@@ -20,12 +20,13 @@ int thirdMax(int* nums, int numsSize){
     }
 
     for(i=0;i<numsSize;i++){
-        if(nums[i]<count[1]&&nums[i]>count[2])
+        if(nums[i]<count[1]&&nums[i]>=count[2]){
+            flag=1;
             count[2]=nums[i];
+        }
     }
-
-    printf("These:%d %d %d \n",count[0],count[1],count[2]);
-    if(count[2]<0)
+    
+    if(flag==0)
         printf("%d",count[0]);
     else
         printf("%d",count[2]);
