@@ -6,7 +6,7 @@
 #include<stdio.h>
 
 int thirdMax(int* nums, int numsSize){
-    int count[3]={-10000,-10000,-10000};
+    int count[3]={INT_MIN,INT_MIN,INT_MIN};
     int i,flag=0;
     printf("Hey %d %d %d!\n",count[0],count[1],count[2]);
     for(i=0;i<numsSize;i++){
@@ -20,7 +20,7 @@ int thirdMax(int* nums, int numsSize){
     }
 
     for(i=0;i<numsSize;i++){
-        if(nums[i]<count[1]&&nums[i]>=count[2]){
+        if(nums[i]<count[1]&&nums[i]>=count[2]){ // Here necessary >= in case the third max number is INT_MIN
             flag=1;
             count[2]=nums[i];
         }
