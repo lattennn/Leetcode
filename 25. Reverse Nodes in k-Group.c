@@ -57,7 +57,7 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k){
     shead=head;
     prev=NULL;
     p1=head;//p1=shead;
-    while(p1!=NULL && p1->next!=NULL && n ){
+    while(p1!=NULL && p1->next!=NULL && n ){   // NOTICE: p1!=NULL is a must and it should be checked before p1->next!=NULL
         p2=p1->next;
         p1->next=p2->next;
         p2->next=shead;
