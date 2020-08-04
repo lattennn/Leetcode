@@ -30,3 +30,34 @@
 // The length of deadends will be in the range [1, 500].
 // target will not be in the list deadends.
 // Every string in deadends and the string target will be a string of 4 digits from the 10,000 possibilities '0000' to '9999'.
+
+class Solution(object):
+    def openLock(self, deadends, target):
+        """
+        :type deadends: List[str]
+        :type target: str
+        :rtype: int
+        """
+        
+        ends=set(deadends)
+        if "0000" in ends: return -1
+        #visited=set()
+        visited={'0000'}
+        #steps = 0
+        q=collections.deque([("0000",0)]) #(("0000",steps)) CANNOT
+        
+        while q:          # q.size() WRONG size(q)!=0 WRONG
+            sz=len(q)#WRONG sz=size(q);
+            for i in range(sz):
+                lock,step = q.popleft()
+                if lock == target: # CANNOT lock = q.popleft() --> lock[0] lock[1] -> WRONG
+                    return step
+                
+                for j in range(4):
+                    for n in [-1,1]:
+                        s=lock[:j]+ str((int(lock[j])+n)%10) + lock[j+1:]
+                        if s not in ends and s not in visited:
+                            q.append((s,step+1))
+                            visited.add(s)
+        return -1                
+                    
